@@ -82,11 +82,15 @@
         const Search = ({ size = 24, className = "" }) => (
             <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
         );
+        const Construction = ({ size = 22, className = "" }) => (
+             <span className="text-xl leading-none">🚧</span>
+        );
 
         const StatusIcon = ({ status }) => {
             if (status === true) return <Check size={22} className="text-[#00ffc0]" />;
             if (status === false) return <X size={22} className="text-[#fb3bfb] opacity-50" />;
             if (status === "limited") return <span className="text-[#f0ff00] font-bold text-lg">⚠️</span>;
+            if (status === "construction") return <Construction />;
             return null;
         };
 
@@ -114,15 +118,15 @@
             { id: 201, category: "Recherche & Übersicht", name: "Volltextsuche", web: true, win: true, note: "Die mächtige Search-Engine ist überall gleich." },
             { id: 202, category: "Recherche & Übersicht", name: "Suchabfragen als Favorit", web: true, win: false, note: "Komplexe Filter als persönlichen 1-Click-Favoriten speichern." },
             { id: 203, category: "Recherche & Übersicht", name: "Filter & Gruppen", web: true, win: true, note: "Das klassische Filtersystem funktioniert überall." },
-            { id: 204, category: "Recherche & Übersicht", name: "Dashboard-Widgets", web: true, win: true, note: "Neue Auswertungen direkt auf dem Dashboard (z. B. Bearbeitungszeit)." },
-            { id: 205, category: "Recherche & Übersicht", name: "Inline-Vorgangsansicht", web: true, win: true, note: "Details in der Liste aufklappen, ohne den Vorgang zu öffnen." },
+            { id: 204, category: "Recherche & Übersicht", name: "Dashboard-Widgets", web: true, win: true, note: "Auswertungen in einem übersichtlichen Dashboard." },
+            { id: 205, category: "Recherche & Übersicht", name: "Aufklappbare Vorgangshistorie", web: true, win: true, note: "Details in der Liste aufklappen, ohne den Vorgang zu öffnen." },
+            { id: 301, category: "Recherche & Übersicht", name: "Anhangsvorschau", web: false, win: true, note: "PDF/Bilder direkt anzeigen (im Webclient noch nicht verfügbar)." },
             { id: 206, category: "Recherche & Übersicht", name: "Flow-Ansicht", web: true, win: false, note: "Moderne Darstellung von Konversationen (wie WhatsApp/Slack)." },
             { id: 207, category: "Recherche & Übersicht", name: "Angepinnte benutzerdefinierte Felder", web: true, win: false, note: "Nur die wichtigsten Metadaten oben anpinnen." },
 
             // 3. DMS & Dokumente
-            { id: 301, category: "DMS & Dokumente", name: "Dokumentenvorschau", web: true, win: true, note: "PDF/Bilder anzeigen geht überall." },
             { id: 302, category: "DMS & Dokumente", name: "Dokumenten-Vergleichsansicht", web: true, win: false, note: "z.B. für den Abgleich von Auftragsbestätigungen mit Rechnungen." },
-            { id: 303, category: "DMS & Dokumente", name: "Drag & Drop (Import)", web: true, win: true, note: "Dateien reinziehen geht bei beiden." },
+            { id: 303, category: "DMS & Dokumente", name: "Drag & Drop (Import)", web: true, win: true, note: "Bilder/PDF reinziehen geht bei beiden." },
             { id: 304, category: "DMS & Dokumente", name: "OCR Drag & Drop", web: true, win: false, note: "Text direkt aus dem Bild/PDF in den Editor ziehen." },
 
             // 4. Look & Feel
@@ -137,8 +141,8 @@
             { id: 503, category: "Administration", name: "Tägliche Orga", web: true, win: true, note: "Themen, Kennzeichnungen, Textbausteine – alles für den Daily-Use ist in beiden Clients voll da." },
             { id: 504, category: "Administration", name: "AI-Agenten (Einrichtung)", web: true, win: true, note: "Einrichtung in beiden Clients möglich." },
             { id: 505, category: "Administration", name: "Basis-Konfiguration", web: true, win: true, note: "In beiden Clients über die Einrichtungshilfe möglich." },
-            { id: 506, category: "Administration", name: "Erweiterte Administration", web: false, win: true, note: "Profile, Ansichten, Vorlagen, Felder – Erweiterte Einstellungen bleiben Windows-Exklusiv." },
-            { id: 507, category: "Administration", name: "Regel-Editor & Automatisierung", web: false, win: true, note: "Regeln erstellen/bearbeiten nur im Windows Client." },
+            { id: 506, category: "Administration", name: "Erweiterte Administration", web: "construction", win: true, note: "Profile, Ansichten, Vorlagen, benutzerdefinierte Felder - Erweiterte Einstellungen werden nach und nach im Webclient verfügbar sein" },
+            { id: 507, category: "Administration", name: "Regel-Editor und Workflows", web: "construction", win: true, note: "Regeln erstellen/bearbeiten nur im Windows Client. Workflows im Webclient in Arbeit" },
         ];
 
         // --- SUB-COMPONENT ---
@@ -324,6 +328,7 @@
                             <div className="flex items-center gap-2 bg-[#111] px-4 py-2 rounded-full border border-[#222]"><span className="text-[#00ffc0]"><Check size={16} /></span> Verfügbar</div>
                             <div className="flex items-center gap-2 bg-[#111] px-4 py-2 rounded-full border border-[#222]"><span className="text-[#f0ff00] text-lg leading-none">⚠️</span> Eingeschränkt</div>
                             <div className="flex items-center gap-2 bg-[#111] px-4 py-2 rounded-full border border-[#222]"><span className="text-[#fb3bfb]"><X size={16} /></span> Nicht verfügbar</div>
+                            <div className="flex items-center gap-2 bg-[#111] px-4 py-2 rounded-full border border-[#222]"><span className="text-xl leading-none">🚧</span> In Arbeit</div>
                         </div>
 
                         {/* Column Headers (Desktop) */}
